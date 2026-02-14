@@ -1,35 +1,118 @@
 const Application = require("../models/applicationModel");
+const githubService = require("./../githubServices");
+//  const {
+//    fullname,
+//    email,
+//    age,
+//    phoneNumber,
+//    educationLevel,
+//    gpa,
+//    primarySkill,
+//    toolsAndTechnologies,
+//    github,
+//    aiExperience,
+//    projectLink,
+//    projectDescription,
+//    salaryExpectation,
+//    cvPath,
+//    whyHireYou,
+//    position,
+//  } = req.body;
 
+//  if (!cvPath) return res.status(400).json({ message: "CV file is required" });
+
+//  const newApplication = newApplication({
+//    fullname,
+//    email,
+//    age,
+//    phoneNumber,
+//    educationLevel,
+//    gpa,
+//    primarySkill,
+//    toolsAndTechnologies,
+//    github,
+//    aiExperience,
+//    projectLink,
+//    projectDescription,
+//    salaryExpectation,
+//    cvPath: cvPath.path,
+//  });
+
+//  await Application.save(newApplication);
 exports.createApplication = async (req, res, next) => {
   try {
-    const newApplication = await Application.create(req.body);
-    console.log("New application created:", newApplication);
+    const {
+      fullname,
+      email,
+      age,
+      phoneNumber,
+      educationLevel,
+      gpa,
+      primarySkill,
+      toolsAndTechnologies,
+      githubLink,
+      githubUsername,
+      aiExperience,
+      projectLink,
+      projectDescription,
+      salaryExpectation,
+      cvPath,
+      whyHireYou,
+      position,
+    } = req.body;
+    let githubInsights = null;
+
+    if (githubUsername) {
+      githubInsights = await githubService.getInsights(githubUsername);
+    }
+
+    const newApplication = new Application({
+      fullname,
+      email,
+      age,
+      phoneNumber,
+      educationLevel,
+      gpa,
+      primarySkill,
+      toolsAndTechnologies,
+      githubLink,
+      aiExperience,
+      githubUsername: githubUsername || null,
+      githubInsights,
+      projectLink,
+      projectDescription,
+      salaryExpectation,
+      cvPath,
+      whyHireYou,
+      position,
+    });
+
+    await newApplication.save();
     res.status(201).json({
-      status: "success",
-      data: newApplication,
+      staus: "success",
+      data: { data: newApplication },
     });
   } catch (error) {
-    res.status(400).json({
-      status: "failed",
-      message: error.message,
+    console.log(error);
+    res.status(404).json({
+      staus: "failed",
+      data: { error },
     });
   }
 };
-
 exports.getAllAplications = async (req, res, next) => {
+  // const newTour = new Tour({}); we can also use this approach
+  // newTour.save().then()
+  const applications = await Application.find();
+  res.status(201).json({
+    staus: "success",
+    data: { length: applications.length, data: applications },
+  });
+};
+
+exports.getTopApplicationStats = async (req, res, next) => {
   try {
-    const applications = await Application.find();
-    res.status(200).json({
-      status: "success",
-      results: applications.length,
-      data: applications,
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: "failed",
-      message: error.message,
-    });
-  }
+  } catch (error) {}
 };
 
 exports.getRankedApplications = async (req, res, next) => {
