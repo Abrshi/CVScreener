@@ -30,8 +30,8 @@ export const ApplicationForm = () => {
     primarySkill: "",
     toolsAndTechnologies: "",
     github: "",
+    aiExperience: "",
     project: "",
-    projectDescription: "",
     salaryExpectation: "",
     cv: "",
     whyHireYou: "",
@@ -54,9 +54,7 @@ export const ApplicationForm = () => {
     setIsSubmitting(true);
     setServerError("");
 
-    // 1. Manual Zod Validation
     const result = applicationSchema.safeParse(formData);
-    console.log("Validation result:", result); // Debug log
 
     if (!result.success) {
       const fieldErrors = {};
@@ -68,15 +66,31 @@ export const ApplicationForm = () => {
       return;
     }
 
-    // 3. Request to your backend
-    // try {
-    //   await axios.post("http://your-backend-api.com/applications", payload);
-    //   alert("Application Submitted!");
-    // } catch (err) {
-    //   setServerError("Failed to submit. Check your connection.");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      await axios.post("http://localhost:8000/api/applications", formData);
+      alert("Application Submitted Successfully!");
+      setFormData({
+        fullname: "",
+        email: "",
+        age: "",
+        phoneNumber: "",
+        educationLevel: "",
+        gpa: "",
+        primarySkill: "",
+        toolsAndTechnologies: "",
+        github: "",
+        aiExperience: "",
+        project: "",
+        salaryExpectation: "",
+        cv: "",
+        whyHireYou: "",
+        position: "",
+      });
+    } catch (err) {
+      setServerError(err.response?.data?.message || "Failed to submit. Check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -293,6 +307,21 @@ export const ApplicationForm = () => {
                     <p className="text-xs text-red-600">{errors.github}</p>
                   )}
                 </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">
+                    AI Experience
+                  </label>
+                  <Input
+                    name="aiExperience"
+                    placeholder="e.g., 2 years"
+                    onChange={handleChange}
+                    value={formData.aiExperience}
+                    className="border-gray-300 focus:border-indigo-500"
+                  />
+                  {errors.aiExperience && (
+                    <p className="text-xs text-red-600">{errors.aiExperience}</p>
+                  )}
+                </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
@@ -307,23 +336,6 @@ export const ApplicationForm = () => {
                 />
                 {errors.project && (
                   <p className="text-xs text-red-600">{errors.project}</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Project description
-                </label>
-                <Textarea
-                  name="projectDescription"
-                  placeholder="Describe your notable project or portfolio link"
-                  onChange={handleChange}
-                  value={formData.projectDescription}
-                  className="border-gray-300 focus:border-indigo-500"
-                />
-                {errors.projectDescription && (
-                  <p className="text-xs text-red-600">
-                    {errors.projectDescription}
-                  </p>
                 )}
               </div>
             </div>

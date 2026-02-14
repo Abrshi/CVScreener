@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// const validator = require("validator");
 
 const applicationSchema = mongoose.Schema({
   fullname: {
@@ -11,7 +10,6 @@ const applicationSchema = mongoose.Schema({
     required: [true, "Please Provide Your Email"],
     unique: [true, "Duplicate Email Not allowed"],
     lowercase: true,
-    // validate: [validator.isEmail, "Please enter a valid email"],
   },
   age: {
     type: Number,
@@ -24,7 +22,7 @@ const applicationSchema = mongoose.Schema({
   },
   educationLevel: {
     type: String,
-    enum: ["Bachelor", "Master", "PhD"],
+    enum: ["High School", "Diploma", "Bachelor", "Master", "PhD", "Other"],
     required: true,
   },
   gpa: {
@@ -37,32 +35,18 @@ const applicationSchema = mongoose.Schema({
     required: true,
   },
   toolsAndTechnologies: String,
-  github: {
-    type: String,
-  },
-
-  projectLink: {
-    type: String,
-  },
-  projectDescription: {
-    type: String,
-  },
+  github: String,
+  aiExperience: String,
+  project: String,
   salaryExpectation: {
     type: Number,
     required: true,
   },
-
   cv: {
-    type: String, // store file path or cloud URL
-    required: true,
-  },
-
-  whyHireYou: {
     type: String,
     required: true,
-    min: 100,
-    max: 150,
   },
+  whyHireYou: String,
   position: {
     type: String,
     required: true,
