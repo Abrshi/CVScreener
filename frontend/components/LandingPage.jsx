@@ -49,7 +49,7 @@ export default function LandingPage() {
               <p className="text-gray-600 mb-6">{role.description}</p>
               <Link
                 href="/form"
-                className="inline-block w-full text-center bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:from-gray-800 hover:to-gray-700 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="inline-block w-full text-center  from-gray-900 to-gray-800 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:from-gray-800 hover:to-gray-700 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
               >
                 Apply
               </Link>
