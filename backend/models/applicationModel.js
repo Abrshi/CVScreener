@@ -43,6 +43,10 @@ const applicationSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  rank: {
+    type: String,
+  },
+  position: {
   jobId: {
     type: String,
     required: true,
