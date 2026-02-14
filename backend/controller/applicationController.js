@@ -4,47 +4,7 @@ exports.createApplication = async (req, res, next) => {
   // const newTour = new Tour({}); we can also use this approach
   // newTour.save().then()
   try {
-    const {
-      fullname,
-      email,
-      age,
-      phoneNumber,
-      educationLevel,
-      gpa,
-      primarySkill,
-      toolsAndTechnologies,
-      github,
-      aiExperience,
-      projectLink,
-      projectDescription,
-      salaryExpectation,
-      cvPath,
-      whyHireYou,
-      position,
-    } = req.body;
-
-    if (!cvPath)
-      return res.status(400).json({ message: "CV file is required" });
-
-    const newApplication = newApplication({
-      fullname,
-      email,
-      age,
-      phoneNumber,
-      educationLevel,
-      gpa,
-      primarySkill,
-      toolsAndTechnologies,
-      github,
-      aiExperience,
-      projectLink,
-      projectDescription,
-      salaryExpectation,
-      cvPath: cvPath.path,
-    });
-
-    await Application.save(newApplication);
-
+    const newApplication = await Application.create(req.body);
     res.status(201).json({
       staus: "success",
       data: { data: newApplication },
