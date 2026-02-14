@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function LandingPage() {
   const roles = [
     {
@@ -46,9 +47,12 @@ export default function LandingPage() {
             >
               <h3 className="text-xl font-semibold mb-3">{role.title}</h3>
               <p className="text-gray-600 mb-6">{role.description}</p>
-              <button className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+              <Link
+                href="/form"
+                className="inline-block w-full text-center bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:from-gray-800 hover:to-gray-700 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              >
                 Apply
-              </button>
+              </Link>
             </div>
           ))}
         </div>
