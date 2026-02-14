@@ -42,75 +42,16 @@ const githubService = require("./../githubServices");
 //  await Application.save(newApplication);
 exports.createApplication = async (req, res, next) => {
   try {
-   
-    const job = await Application.findById(req.body.jobId);
-
-   
-    const result = await processAI(req.body, job);
-
- 
-    req.body.rank = result;
-
-   
     const newApplication = await Application.create(req.body);
-
-    const {
-      fullname,
-      email,
-      age,
-      phoneNumber,
-      educationLevel,
-      gpa,
-      primarySkill,
-      toolsAndTechnologies,
-      githubLink,
-      githubUsername,
-      aiExperience,
-      projectLink,
-      projectDescription,
-      salaryExpectation,
-      cvPath,
-      whyHireYou,
-      position,
-    } = req.body;
-    let githubInsights = null;
-
-    if (githubUsername) {
-      githubInsights = await githubService.getInsights(githubUsername);
-    }
-
-    const newApplication = new Application({
-      fullname,
-      email,
-      age,
-      phoneNumber,
-      educationLevel,
-      gpa,
-      primarySkill,
-      toolsAndTechnologies,
-      githubLink,
-      aiExperience,
-      githubUsername: githubUsername || null,
-      githubInsights,
-      projectLink,
-      projectDescription,
-      salaryExpectation,
-      cvPath,
-      whyHireYou,
-      position,
-    });
-
-    await newApplication.save();
     res.status(201).json({
       status: "success",
-      data: { data: newApplication },
+      data: newApplication,
     });
-
   } catch (error) {
     console.log("Error creating application:", error);
-    res.status(404).json({
+    res.status(400).json({
       status: "failed",
-      data: { error },
+      message: error.message,
     });
   }
 };

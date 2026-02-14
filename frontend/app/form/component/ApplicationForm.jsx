@@ -32,10 +32,12 @@ export const ApplicationForm = () => {
     github: "",
     aiExperience: "",
     project: "",
+    projectDescription: "",
     salaryExpectation: "",
     cv: "",
     whyHireYou: "",
     position: "",
+    jobId: "JOB001",
   });
 
   const [errors, setErrors] = useState({});
@@ -81,10 +83,12 @@ export const ApplicationForm = () => {
         github: "",
         aiExperience: "",
         project: "",
+        projectDescription: "",
         salaryExpectation: "",
         cv: "",
         whyHireYou: "",
         position: "",
+        jobId: "JOB001",
       });
     } catch (err) {
       setServerError(
