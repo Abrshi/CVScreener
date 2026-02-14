@@ -87,7 +87,10 @@ export const ApplicationForm = () => {
         position: "",
       });
     } catch (err) {
-      setServerError(err.response?.data?.message || "Failed to submit. Check your connection.");
+      setServerError(
+        err.response?.data?.message ||
+          "Failed to submit. Check your connection.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -319,7 +322,9 @@ export const ApplicationForm = () => {
                     className="border-gray-300 focus:border-indigo-500"
                   />
                   {errors.aiExperience && (
-                    <p className="text-xs text-red-600">{errors.aiExperience}</p>
+                    <p className="text-xs text-red-600">
+                      {errors.aiExperience}
+                    </p>
                   )}
                 </div>
               </div>

@@ -11,25 +11,16 @@ const applicationSchema = mongoose.Schema({
     unique: [true, "Duplicate Email Not allowed"],
     lowercase: true,
   },
-  age: {
-    type: Number,
-    min: 16,
-    max: 100,
-  },
+  age: String,
   phoneNumber: {
     type: String,
     required: [true, "Phone number is required"],
   },
   educationLevel: {
     type: String,
-    enum: ["High School", "Diploma", "Bachelor", "Master", "PhD", "Other"],
     required: true,
   },
-  gpa: {
-    type: Number,
-    min: 0,
-    max: 4,
-  },
+  gpa: String,
   primarySkill: {
     type: String,
     required: true,
@@ -38,8 +29,9 @@ const applicationSchema = mongoose.Schema({
   github: String,
   aiExperience: String,
   project: String,
+  projectDescription: String,
   salaryExpectation: {
-    type: Number,
+    type: String,
     required: true,
   },
   cv: {
