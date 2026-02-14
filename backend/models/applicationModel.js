@@ -37,8 +37,9 @@ const applicationSchema = mongoose.Schema({
     required: true,
   },
   toolsAndTechnologies: String,
-  github: {
+  githubLink: {
     type: String,
+    required: [true, "Please enter you Git hub Account link"],
   },
 
   projectLink: {
@@ -53,8 +54,8 @@ const applicationSchema = mongoose.Schema({
   },
 
   cv: {
-    type: String, // store file path or cloud URL
-    required: true,
+    type: String, //
+    // required: true,
   },
 
   whyHireYou: {
@@ -67,6 +68,26 @@ const applicationSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  githubUsername: { type: String, trim: true },
+  githubInsights: {
+    username: String,
+    name: String,
+    avatar: String,
+    bio: String,
+    location: String,
+    joined: String,
+    publicRepos: Number,
+    followers: Number,
+    recentActivity: Number,
+    mostActiveRepo: String,
+    topLanguages: [String],
+    activityLevel: String,
+  },
+  score: {
+    type: String,
+    default: 0,
+  },
+  job: [{ type: mongoose.Schema.ObjectId, ref: "Application" }],
 });
 
 const Application = mongoose.model("Application", applicationSchema);
