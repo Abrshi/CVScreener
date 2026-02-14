@@ -17,4 +17,5 @@ export const applicationSchema = z.object({
   cv: z.string().min(1, "CV path or URL is required"),
   whyHireYou: z.string().optional(),
   position: z.string().min(1, "Position is required"),
+  jobId: z.string().min(1, "Job ID is required"),
 });

@@ -43,6 +43,10 @@ const applicationSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  jobId: {
+    type: String,
+    required: true,
+  },
 });
 
 const Application = mongoose.model("Application", applicationSchema);
