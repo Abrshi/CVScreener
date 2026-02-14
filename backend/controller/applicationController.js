@@ -41,71 +41,32 @@ const githubService = require("./../githubServices");
 //  await Application.save(newApplication);
 exports.createApplication = async (req, res, next) => {
   try {
-    const {
-      fullname,
-      email,
-      age,
-      phoneNumber,
-      educationLevel,
-      gpa,
-      primarySkill,
-      toolsAndTechnologies,
-      githubLink,
-      githubUsername,
-      aiExperience,
-      projectLink,
-      projectDescription,
-      salaryExpectation,
-      cvPath,
-      whyHireYou,
-      position,
-    } = req.body;
-    let githubInsights = null;
-
-    if (githubUsername) {
-      githubInsights = await githubService.getInsights(githubUsername);
-    }
-
-    const newApplication = new Application({
-      fullname,
-      email,
-      age,
-      phoneNumber,
-      educationLevel,
-      gpa,
-      primarySkill,
-      toolsAndTechnologies,
-      githubLink,
-      aiExperience,
-      githubUsername: githubUsername || null,
-      githubInsights,
-      projectLink,
-      projectDescription,
-      salaryExpectation,
-      cvPath,
-      whyHireYou,
-      position,
-    });
-
-    await newApplication.save();
+    const newApplication = await Application.create(req.body);
+    console.log("New application created:", newApplication);
     res.status(201).json({
-      staus: "success",
-      data: { data: newApplication },
+      status: "success",
+      data: newApplication,
     });
   } catch (error) {
-    console.log(error);
-    res.status(404).json({
-      staus: "failed",
-      data: { error },
+    res.status(400).json({
+      status: "failed",
+      message: error.message,
     });
   }
 };
+
 exports.getAllAplications = async (req, res, next) => {
-  // const newTour = new Tour({}); we can also use this approach
-  // newTour.save().then()
-  const applications = await Application.find();
-  res.status(201).json({
-    staus: "success",
-    data: { length: applications.length, data: applications },
-  });
+  try {
+    const applications = await Application.find();
+    res.status(200).json({
+      status: "success",
+      results: applications.length,
+      data: applications,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "failed",
+      message: error.message,
+    });
+  }
 };
