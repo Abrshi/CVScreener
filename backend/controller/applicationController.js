@@ -4,7 +4,6 @@ exports.createApplication = async (req, res, next) => {
   try {
     const newApplication = await Application.create(req.body);
     console.log("New application created:", newApplication);
-
     res.status(201).json({
       status: "success",
       data: newApplication,
