@@ -26,15 +26,27 @@ const applicationSchema = mongoose.Schema({
     required: true,
   },
   toolsAndTechnologies: String,
-  github: String,
-  aiExperience: String,
-  project: String,
-  projectDescription: String,
+  githubLink: {
+    type: String,
+    required: [true, "Please enter you Git hub Account link"],
+  },
+
+  projectLink: {
+    type: String,
+  },
+  projectDescription: {
+    type: String,
+  },
   salaryExpectation: {
     type: String,
     required: true,
   },
   cv: {
+    type: String, //
+    // required: true,
+  },
+
+  whyHireYou: {
     type: String,
     required: true,
   },
@@ -43,6 +55,26 @@ const applicationSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  githubUsername: { type: String, trim: true },
+  githubInsights: {
+    username: String,
+    name: String,
+    avatar: String,
+    bio: String,
+    location: String,
+    joined: String,
+    publicRepos: Number,
+    followers: Number,
+    recentActivity: Number,
+    mostActiveRepo: String,
+    topLanguages: [String],
+    activityLevel: String,
+  },
+  score: {
+    type: String,
+    default: 0,
+  },
+  job: [{ type: mongoose.Schema.ObjectId, ref: "Application" }],
 });
 
 const Application = mongoose.model("Application", applicationSchema);

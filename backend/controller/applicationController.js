@@ -1,5 +1,44 @@
 const Application = require("../models/applicationModel");
+const githubService = require("./../githubServices");
+//  const {
+//    fullname,
+//    email,
+//    age,
+//    phoneNumber,
+//    educationLevel,
+//    gpa,
+//    primarySkill,
+//    toolsAndTechnologies,
+//    github,
+//    aiExperience,
+//    projectLink,
+//    projectDescription,
+//    salaryExpectation,
+//    cvPath,
+//    whyHireYou,
+//    position,
+//  } = req.body;
 
+//  if (!cvPath) return res.status(400).json({ message: "CV file is required" });
+
+//  const newApplication = newApplication({
+//    fullname,
+//    email,
+//    age,
+//    phoneNumber,
+//    educationLevel,
+//    gpa,
+//    primarySkill,
+//    toolsAndTechnologies,
+//    github,
+//    aiExperience,
+//    projectLink,
+//    projectDescription,
+//    salaryExpectation,
+//    cvPath: cvPath.path,
+//  });
+
+//  await Application.save(newApplication);
 exports.createApplication = async (req, res, next) => {
   try {
     const newApplication = await Application.create(req.body);
