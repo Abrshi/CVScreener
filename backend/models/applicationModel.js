@@ -63,6 +63,9 @@ const applicationSchema = mongoose.Schema({
     min: 100,
     max: 150,
   },
+  rank: {
+    type: String,
+  },
   position: {
     type: String,
     required: true,
